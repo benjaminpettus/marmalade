@@ -12,12 +12,12 @@ const About = () => <h1>About</h1>
 class App extends Component {
 
   mountAudio = async () => {
-    const widget = Mixcloud.PlayerWidget(this.player)
+    this.widget = Mixcloud.PlayerWidget(this.player)
     // waiting for our widget to be ready to load
-    await widget.ready
-    await widget.play();
-    
-    console.log(widget);
+    await this.widget.ready
+    await this.widget.play();
+
+    console.log(this.widget);
   }
 
   componentDidMount(){
@@ -25,6 +25,11 @@ class App extends Component {
    //componentDidMount gets called and we can be sure
    // everything is ready and can run mountAudio()
     this.mountAudio()
+  }
+
+  togglePlay = () => {
+    console.log('togglePlay')
+    this.widget.togglePlay()
   }
 
   render() {
@@ -40,6 +45,10 @@ class App extends Component {
               {/* Header (needs styling and updating)  */}
               <Header />
               {/* Routed page */}
+              <div>
+                <button onClick={this.togglePlay}>Play/Pause</button>
+              </div>
+
               <Route exact path="/" component={Home}/>
               <Route exact path="/archive" component={Archive}/>
               <Route exact path="/about" component={About}/>
