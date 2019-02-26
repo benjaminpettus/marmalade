@@ -32,6 +32,11 @@ class App extends Component {
     this.widget.togglePlay()
   }
 
+  playMix = mixName => {
+    //load a new mix by its name and start playing it immediately
+    this.widget.load(mixName, true)
+  }
+
   render() {
     return (
       <Router>
@@ -47,6 +52,10 @@ class App extends Component {
               {/* Routed page */}
               <div>
                 <button onClick={this.togglePlay}>Play/Pause</button>
+              </div>
+
+              <div>
+                <button onClick={() => this.playMix('/NTSRadio/bonobo-24th-june-2015/')}>Play Mix</button>
               </div>
 
               <Route exact path="/" component={Home}/>
